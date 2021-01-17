@@ -200,12 +200,12 @@ class Router(object):
             list_item.addContextMenuItems(
                 [
                     (
-                        tr(30023) if m["is_bookmarked"] else tr(30024),
+                        tr(30023) if m.get("is_bookmarked",False) else tr(30024),
                         "RunPlugin({}?action=change_watchlist"
                         "&media={}&is_bookmarked={}&is_collection={})".format(
                             self._plugin_url,
                             m["id"],
-                            m["is_bookmarked"],
+                            m.get("is_bookmarked",False),
                             m["is_folder"],
                         ),
                     )
@@ -241,3 +241,4 @@ class Router(object):
             tr(30025), tr(30026) if is_bookmarked == "True" else tr(30027),
         )
         xbmc.executebuiltin("Container.Refresh()")
+
